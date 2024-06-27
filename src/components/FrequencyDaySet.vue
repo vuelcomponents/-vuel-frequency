@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { OnClickedParam } from "../utils/types/OnClickedParam.ts";
-import {getDate, getDayOfYear} from "../utils/days.ts";
+import { getDate, getDayOfYear } from "../utils/days.ts";
 
 const props = defineProps<{
   size?: "sm" | "l" | "xl" | "xs" | "us";
-  label?: (day: number) => string;
+  label?: (date: Date, qty: number) => string;
   data: any;
   days: Array<number>;
   dateParam: string;
 }>();
 
 const getDateFromDayOfYear = computed(() => {
-  return (dayOfYear: number, noLocale?: boolean): Date | string => getDate(dayOfYear, noLocale);
+  return (dayOfYear: number, noLocale?: boolean): Date | string =>
+    getDate(dayOfYear, noLocale);
 });
 const emit = defineEmits<{
   onClicked: [OnClickedParam<(typeof props.data)[0]>];
@@ -20,13 +21,16 @@ const emit = defineEmits<{
 
 const getContributions = computed(() => {
   return (day: number) => {
-    return props.data.filter((d: any) => getDayOfYear(new Date(d.date)) === day)
-      .length;
+    return props.data.filter(
+      (d: any) => getDayOfYear(new Date(d[props.dateParam])) === day,
+    ).length;
   };
 });
 
 const getDayData = (day: number) => {
-  return props.data.filter((d: any) => getDayOfYear(new Date(d.date)) === day);
+  return props.data.filter(
+    (d: any) => getDayOfYear(new Date(d[props.dateParam])) === day,
+  );
 };
 
 const onClicked = (event: MouseEvent, day: number) => {
@@ -66,7 +70,10 @@ const onClicked = (event: MouseEvent, day: number) => {
     <div class="tooltip">
       {{
         label
-          ? label(day)
+          ? label(
+              getDateFromDayOfYear(day, true) as Date,
+              getContributions(day),
+            )
           : getContributions(day) +
             ` contributions in ` +
             getDateFromDayOfYear(day)

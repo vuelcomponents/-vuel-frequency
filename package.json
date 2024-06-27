@@ -1,7 +1,7 @@
 {
-  "name": "@vuel/frequency",
+  "name": "vuelfrequency",
   "private": false,
-  "version": "0.5",
+  "version": "0.5.1",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -9,6 +9,11 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuelcomponents/-vuel-frequency.git"
+  },
+  "homepage": "https://vuelcomponents.github.io",
   "keywords": [
     "frequency",
     "calendar",

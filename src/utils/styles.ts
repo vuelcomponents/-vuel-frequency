@@ -13,7 +13,7 @@ export const styles = () => {
         
         .frequency-container {
           display: flex;
-          width: 100%;
+          width: fit-content;
           height: 100%;
           padding: 2px;
           max-height: calc(5 * (100% - 4px));
@@ -89,6 +89,10 @@ export const styles = () => {
         }
         .highestActive {
           background:  var(--frequency-high-active)!important;
+        }
+        .frequency-month{
+          font-size:0.65em;
+          padding-inline:1em;
         }
   `;
   document.head.appendChild(style);
