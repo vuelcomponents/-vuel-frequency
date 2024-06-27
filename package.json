@@ -1,0 +1,49 @@
+{
+  "name": "@vuel/frequency",
+  "private": false,
+  "version": "0.5",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "frequency",
+    "calendar",
+    "chart",
+    "activity",
+    "periodically",
+    "quantity",
+    "measure",
+    "metrics",
+    "statistics",
+    "vuel"
+  ],
+  "files": [
+    "dist"
+  ],
+  "rules": {
+    "no-unused-vars": "off"
+  },
+  "main": "./dist/frequency.cjs",
+  "module": "./dist/frequency.js",
+  "exports": {
+    ".": {
+      "import": "./dist/frequency.js",
+      "require": "./dist/frequency.cjs"
+    }
+  },
+  "dependencies": {
+    "vite-plugin-dts": "^3.7.3",
+    "vue": "^3.3.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.0",
+    "autoprefixer": "^10.4.17",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vue-tsc": "^1.8.22"
+  }
+}
