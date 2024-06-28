@@ -19,6 +19,7 @@ const onClicked = (data: OnClickedParam<(typeof randomData)[0]>) => {
           `${qty} contributions in ${date.toLocaleDateString()}`
       "
       size="l"
+      :hide-months="false"
     >
     </Frequency>
 </template>

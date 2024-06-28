@@ -10,6 +10,7 @@ const props = defineProps<{
   data: any;
   label?: (date: Date, qty: number) => string;
   size?: "sm" | "l" | "xl" | "xs" | "us";
+  hideMonths?: boolean;
 }>();
 
 const getContributions = computed(() => {
@@ -49,27 +50,29 @@ onMounted(() => {
 
 <template>
   <section
-    style="max-width: fit-content; display: flex; flex-direction: column; overflow-x:auto"
+    style="display: grid; overflow-x:auto;width:auto; "
   >
-    <header style="display: flex; justify-content: space-between">
-      <div v-for="month in months" :key="month" class="frequency-month">
-        {{ month }}
+    <div style="width:fit-content; height:fit-content">
+      <div style="display:flex; justify-content: space-between; width:auto" v-if="!hideMonths">
+        <div v-for="month in months" :key="month" >
+          {{ month }}
+        </div>
       </div>
-    </header>
-    <div class="frequency-container">
-      <div
-        v-for="(_days, index) in days"
-        :key="index"
-        class="day-set-container"
-      >
-        <FrequencyDaySet
-          :days="_days"
-          :data="data"
-          @onClicked="onDayClicked"
-          :size="size"
-          :dateParam="dateParam"
-          :label="label"
-        />
+      <div class="frequency-container">
+        <div
+            v-for="(_days, index) in days"
+            :key="index"
+            class="day-set-container"
+        >
+          <FrequencyDaySet
+              :days="_days"
+              :data="data"
+              @onClicked="onDayClicked"
+              :size="size"
+              :dateParam="dateParam"
+              :label="label"
+          />
+        </div>
       </div>
     </div>
   </section>

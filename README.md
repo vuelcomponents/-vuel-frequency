@@ -11,6 +11,7 @@
   @onClicked="(data) => console.log(data)"
   :label="(date:Date, qty:number)=>`${qty} contributions in ${date.toLocaleDateString()}`"
   size="xs"
+  :hide-months="false" // hide month labels
 />
 ```
 
