@@ -1,31 +1,18 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { OnClickedParam } from "../utils/types/OnClickedParam.ts";
-import { getDate, getDayOfYear } from "../utils/days.ts";
+import { getDayOfYear } from "../utils/days.ts";
 
 const props = defineProps<{
   size?: "sm" | "l" | "xl" | "xs" | "us";
   label?: (date: Date, qty: number) => string;
   data: any;
-  days: Array<number>;
+  days: Array<any>;
   dateParam: string;
 }>();
 
-const getDateFromDayOfYear = computed(() => {
-  return (dayOfYear: number, noLocale?: boolean): Date | string =>
-    getDate(dayOfYear, noLocale);
-});
 const emit = defineEmits<{
   onClicked: [OnClickedParam<(typeof props.data)[0]>];
 }>();
-
-const getContributions = computed(() => {
-  return (day: number) => {
-    return props.data.filter(
-      (d: any) => getDayOfYear(new Date(d[props.dateParam])) === day,
-    ).length;
-  };
-});
 
 const getDayData = (day: number) => {
   return props.data.filter(
@@ -33,11 +20,11 @@ const getDayData = (day: number) => {
   );
 };
 
-const onClicked = (event: MouseEvent, day: number) => {
+const onClicked = (event: MouseEvent, day: any) => {
   const data: OnClickedParam<(typeof props.data)[0]> = {
-    localeDate: getDateFromDayOfYear.value(day),
-    date: getDateFromDayOfYear.value(day, true),
-    contributions: getContributions.value(day),
+    localeDate: day.date.toLocaleDateString(),
+    date: day.date,
+    contributions: day.contributions,
     event,
     data: getDayData(day),
   };
@@ -49,16 +36,12 @@ const onClicked = (event: MouseEvent, day: number) => {
   <div
     v-for="day in days"
     :key="day"
-    v-show="
-      day < 358 ||
-      (getDateFromDayOfYear(day, true) as Date).getFullYear() ===
-        new Date().getFullYear()
-    "
+    v-show="day < 358 || day.date.getFullYear() === new Date().getFullYear()"
     class="ring"
     :class="{
-      active: getContributions(day) > 0,
-      moreActive: getContributions(day) > 5,
-      highestActive: getContributions(day) > 10,
+      active: day.contributions > 0,
+      moreActive: day.contributions > 5,
+      highestActive: day.contributions > 10,
       small: !size || size === 'sm',
       large: size === 'l',
       xlarge: size === 'xl',
@@ -70,13 +53,8 @@ const onClicked = (event: MouseEvent, day: number) => {
     <div class="tooltip">
       {{
         label
-          ? label(
-              getDateFromDayOfYear(day, true) as Date,
-              getContributions(day),
-            )
-          : getContributions(day) +
-            ` contributions in ` +
-            getDateFromDayOfYear(day)
+          ? label(day.date, day.contributions)
+          : day.contributions + ` contributions in ` + day.date
       }}
     </div>
   </div>
