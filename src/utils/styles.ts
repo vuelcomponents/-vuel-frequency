@@ -21,25 +21,25 @@ export const styles = () => {
           user-select: none;
         }
         
-        .ring {
+        .frequency-ring {
           position: relative;
           border-radius: 10%;
           border: solid 1px var(--frequency-ring-color);
           background: var(--frequency-no-contribution-color);
         }
-        .ring.usmall {
+        .frequency-ring.usmall {
           min-height: 5%;
           min-width: 5px;
           width: 6px;
           height: 6px;
         }
-        .ring.xsmall {
+        .frequency-ring.xsmall {
           min-height: 5%;
           min-width: 5px;
           width: 10px;
           height: 10px;
         }
-        .ring.small {
+        .frequency-ring.small {
           min-height: 5%;
           min-width: 5px;
           width: 10px;
@@ -47,7 +47,7 @@ export const styles = () => {
           margin-block: 4px;
           height: 10px;
         }
-        .ring.large {
+        .frequency-ring.large {
           min-height: 5%;
           min-width: 15px;
           width: 15px;
@@ -55,7 +55,7 @@ export const styles = () => {
           margin-block: 4px;
           height: 15px;
         }
-        .ring.xlarge {
+        .frequency-ring.xlarge {
           min-height: 5%;
           min-width: 20px;
           width: 20px;
@@ -78,7 +78,7 @@ export const styles = () => {
           border-radius: 4px;
           border: solid 1px var(--frequency-ring-color);
         }
-        .ring:hover .tooltip {
+        .frequency-ring:hover .tooltip {
           display: block;
         }
         .active {

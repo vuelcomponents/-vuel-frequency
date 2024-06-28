@@ -18,7 +18,7 @@ const onClicked = (data: OnClickedParam<(typeof randomData)[0]>) => {
         (date: Date, qty: number) =>
           `${qty} contributions in ${date.toLocaleDateString()}`
       "
-      size="xs"
+      size="l"
     >
     </Frequency>
 </template>

@@ -49,7 +49,7 @@ onMounted(() => {
 
 <template>
   <section
-    style="max-width: fit-content; display: flex; flex-direction: column"
+    style="max-width: fit-content; display: flex; flex-direction: column; overflow-x:auto"
   >
     <header style="display: flex; justify-content: space-between">
       <div v-for="month in months" :key="month" class="frequency-month">

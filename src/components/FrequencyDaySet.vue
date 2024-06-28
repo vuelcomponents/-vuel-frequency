@@ -37,7 +37,7 @@ const onClicked = (event: MouseEvent, day: any) => {
     v-for="day in days"
     :key="day"
     v-show="day < 358 || day.date.getFullYear() === new Date().getFullYear()"
-    class="ring"
+    class="frequency-ring"
     :class="{
       active: day.contributions > 0,
       moreActive: day.contributions > 5,
