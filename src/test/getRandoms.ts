@@ -1,9 +1,9 @@
 export const getRandoms = () => {
   const events = [];
-  const startDate = new Date(new Date().getFullYear(), 0, 1); // Początkowa data - 1 stycznia bieżącego roku
-  const endDate = new Date(new Date().getFullYear(), 11, 31); // Końcowa data - 31 grudnia bieżącego roku
+  const startDate = new Date(new Date().getFullYear(), 0, 1);
+  const endDate = new Date(new Date().getFullYear(), 11, 31);
   for (let i = 0; i < 150; i++) {
-    let randomDate;
+    let randomDate:any;
     randomDate = new Date(
       startDate.getTime() +
         Math.random() * (endDate.getTime() - startDate.getTime()),

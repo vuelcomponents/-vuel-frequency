@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { OnClickedParam } from "../utils/types/OnClickedParam.ts";
 import FrequencyDaySet from "./FrequencyDaySet.vue";
-import { computed, onMounted } from "vue";
+import { onMounted } from "vue";
 import { styles } from "../utils/styles.ts";
 import { getDate, getDayOfYear, months } from "../utils/days.ts";
 
@@ -13,24 +13,33 @@ const props = defineProps<{
   hideMonths?: boolean;
 }>();
 
-const getContributions = (day: number) => {
-    return props.data.filter(
-      (d: any) => getDayOfYear(new Date(d[props.dateParam])) === day,
-    ).length;
-};
-
 const getDateFromDayOfYear =  (dayOfYear: number, noLocale?: boolean): Date | string => getDate(dayOfYear, noLocale);
+
 
 const days = Array.from({ length: Math.ceil(366 / 7) }, (_, index) =>
   Array.from({ length: 7 }, (_, i) => {
     const day = index * 7 + i + 1 - (index === 0 ? 1 : 0);
     return {
       day: day,
-      contributions: getContributions(day),
+      contributions: 0,
       date: getDateFromDayOfYear(day, true),
     };
   }),
 );
+const matchContributions = () =>{
+  props.data.forEach((d: any) => {
+    const date = new Date(d[props.dateParam]);
+    const dayOfYear = getDayOfYear(date);
+    days.forEach((week) => {
+      week.forEach((day) => {
+        if (day.day === dayOfYear) {
+          day.contributions++;
+        }
+      });
+    });
+  });
+}
+matchContributions();
 
 const emit = defineEmits<{
   onClicked: [OnClickedParam<(typeof props.data)[0]>];
