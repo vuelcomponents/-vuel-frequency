@@ -13,25 +13,21 @@ const props = defineProps<{
   hideMonths?: boolean;
 }>();
 
-const getContributions = computed(() => {
-  return (day: number) => {
+const getContributions = (day: number) => {
     return props.data.filter(
       (d: any) => getDayOfYear(new Date(d[props.dateParam])) === day,
     ).length;
-  };
-});
-const getDateFromDayOfYear = computed(() => {
-  return (dayOfYear: number, noLocale?: boolean): Date | string =>
-    getDate(dayOfYear, noLocale);
-});
+};
+
+const getDateFromDayOfYear =  (dayOfYear: number, noLocale?: boolean): Date | string => getDate(dayOfYear, noLocale);
 
 const days = Array.from({ length: Math.ceil(366 / 7) }, (_, index) =>
   Array.from({ length: 7 }, (_, i) => {
     const day = index * 7 + i + 1 - (index === 0 ? 1 : 0);
     return {
       day: day,
-      contributions: getContributions.value(day),
-      date: getDateFromDayOfYear.value(day, true),
+      contributions: getContributions(day),
+      date: getDateFromDayOfYear(day, true),
     };
   }),
 );

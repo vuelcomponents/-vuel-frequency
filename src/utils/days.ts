@@ -7,12 +7,14 @@ export const getDate = (
   startOfYear.setDate(startOfYear.getDate() + dayOfYear);
   return noLocale ? startOfYear : startOfYear.toLocaleDateString();
 };
+
+const ONE_DAY = 1000 * 60 * 60 * 24;
 export const getDayOfYear = (date: Date): number => {
   const startOfYear = new Date(date.getFullYear(), 0, 0);
   const diff = date.getTime() - startOfYear.getTime();
-  const oneDay = 1000 * 60 * 60 * 24;
-  return Math.floor(diff / oneDay);
+  return (diff / ONE_DAY) | 0; // Użycie bitowego OR jako szybkiego sposobu na zaokrąglenie w dół
 };
+
 export const months = [
   "Jan",
   "Feb",

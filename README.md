@@ -5,6 +5,8 @@
 ## Usage
 
 ```js
+import Frequency, {type OnClickedParam} from 'vuelfrequency';
+
 <Frequency
   :data="getRandoms()"
   date-param="timeStamp"
